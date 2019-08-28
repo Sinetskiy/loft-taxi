@@ -2,19 +2,24 @@ import React, {PureComponent} from 'react';
 import './Header.css';
 import {AuthConsumer} from "../../Auth";
 import SectionTitle from "../SectionTitle";
+import {Link} from "react-router-dom";
+import Button from "@material-ui/core/Button";
 
 class Header extends PureComponent {
+
     render() {
+
         return <AuthConsumer>
-            {({isAuthorized, email, logout}) => {
+            {({isAuthorized, logout}) => {
                 return <header className="header">
-                    <SectionTitle className="header__title" >Header</SectionTitle>
+                    <SectionTitle className="header__title">Loft Taxi</SectionTitle>
                     <div className="header__content">
-                        {isAuthorized ? <div className="header-menu">
-                                <p className="header-menu__email header-email t-header-email">{email}</p>
-                                <button className="header-menu__button t-logout button" onClick={logout}> Выйти</button>
-                            </div>
-                            : ''}
+                        <div className="header-menu">
+                            <Button to='/map' component={Link}>КАРТА</Button>
+                            <Button to='/profile' component={Link}>ПРОФИЛЬ</Button>
+                            {isAuthorized ? <Button onClick={logout}>ВЫЙТИ</Button> :
+                                <Button to='/login' component={Link}>ВОЙТИ</Button>}
+                        </div>
                     </div>
                 </header>;
             }}

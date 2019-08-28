@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import mapboxgl from 'mapbox-gl'
 
-class Congratulations extends Component {
+class Map extends Component {
     map = null;
     mapContainer = React.createRef();
 
@@ -24,4 +24,4 @@ class Congratulations extends Component {
     }
 }
 
-export default Congratulations;
+export default Map;
