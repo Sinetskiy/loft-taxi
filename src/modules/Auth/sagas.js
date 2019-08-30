@@ -3,10 +3,10 @@ import {login} from "./api";
 import {getLoginFailure, getLoginRequest, getLoginSuccess} from "./actions";
 
 function* sagaAuthorize(action) {
-    const {email, pass} = action.payload;
+    const {email, password} = action.payload;
 
     try {
-        const response = yield call(login, email, pass);
+        const response = yield call(login, email, password);
         if (response.success) {
             yield put(getLoginSuccess());
         } else {

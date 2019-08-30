@@ -4,35 +4,22 @@ import Layout from '../Layout';
 import Header from '../Header';
 import LoginForm from '../LoginForm';
 import Map from '../Map';
-import {AuthProvider, AuthConsumer} from '../../Auth';
 import Profile from "../Profile";
+import PrivateRoute from "../PrivateRoute";
 
 class App extends PureComponent {
     render() {
         return (
-            <AuthProvider>
                 <BrowserRouter>
                     <Layout header={Header}>
-                        <AuthConsumer>
-                            {({isAuthorized, authorize, authorizeError}) =>
-                                isAuthorized ? (
-                                    <Switch>
-                                        <Route exact path='/map' component={Map}/>
-                                        <Route exact path='/profile' component={Profile}/>
-                                        <Redirect to='/map'/>
-                                    </Switch>
-                                ) : (
-                                    <Switch>
-                                        <Route exact path='/login' component={ () =>
-                                              <LoginForm authorize={authorize} authorizeError={authorizeError}/> }/>
-                                        <Redirect to='/login'/>
-                                    </Switch>
-                                )
-                            }
-                        </AuthConsumer>
+                        <Switch>
+                            <PrivateRoute exact path='/map' component={Map}/>
+                            <PrivateRoute exact path='/profile' component={Profile}/>
+                            <Route exact path='/login' component={LoginForm}/>
+                            <Redirect to='/login'/>
+                        </Switch>
                     </Layout>
                 </BrowserRouter>
-            </AuthProvider>
         );
     }
 }

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import mapboxgl from 'mapbox-gl'
+import MapsRoute from "./MapsRoute/MapsRoute";
 
 class Map extends Component {
     map = null;
@@ -20,7 +21,11 @@ class Map extends Component {
     }
 
     render() {
-        return <div style={{width: '100%', height: '800px'}} ref={this.mapContainer}/>;
+        return <div>
+            <div style={{width: '100%', height: '800px'}} ref={this.mapContainer}/>
+            <MapsRoute/>
+        </div>;
+
     }
 }
 
