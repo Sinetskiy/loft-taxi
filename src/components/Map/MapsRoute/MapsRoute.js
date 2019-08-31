@@ -29,6 +29,7 @@ class MapsRoute extends React.Component {
 
     callTaxi = () => {
         const {startAddress, destinationAddress} = this.state;
+        const {fetchCoordinatesRequest} = this.props;
 
         fetchCoordinatesRequest({startAddress: startAddress.value, destinationAddress: destinationAddress.value});
         console.log(`call taxi ${startAddress.value} to ${destinationAddress.value}`);
