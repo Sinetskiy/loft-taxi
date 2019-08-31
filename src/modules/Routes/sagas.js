@@ -15,7 +15,7 @@ function* fetchAddressList() {
         const response = yield call(getAddressList);
         yield put(fetchAddressListSuccess(response.addresses));
     } catch (error) {
-        yield put(fetchAddressListFailure(error))
+        yield put(fetchAddressListFailure(error.message))
     }
 }
 
@@ -25,10 +25,10 @@ function* fetchRoutesCoordinates(action) {
 
     try {
         const response = yield call(getCoordinatesOfRoute, startAddress, destinationAddress);
-        debugger;
+
         yield put(fetchCoordinatesSuccess(response));
     } catch (error) {
-        yield put(fetchCoordinatesFailure(error))
+        yield put(fetchCoordinatesFailure(error.message))
     }
 }
 

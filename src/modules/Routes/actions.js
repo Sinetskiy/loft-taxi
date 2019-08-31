@@ -18,3 +18,6 @@ export const fetchCoordinatesSuccess = createAction(
 export const fetchCoordinatesFailure = createAction(
   'ROUTES/FETCH_COORDINATES_FAILURE'
 );
+export const clearCoordinates = createAction(
+  'ROUTES/CLEAR_COORDINATES'
+);

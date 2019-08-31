@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import mapboxgl from 'mapbox-gl'
 import MapsRoute from "./MapsRoute/MapsRoute";
+import {connect} from "react-redux";
+import {getCoordinates} from "../../modules/Routes";
 
 class Map extends Component {
     map = null;
@@ -20,7 +22,53 @@ class Map extends Component {
         this.map.remove();
     }
 
+    addRoute = (coordinates) => {
+
+        this.map.addLayer({
+            "id": 'route',
+            "type": "line",
+            "source": {
+                "type": "geojson",
+                "data": {
+                    "type": "Feature",
+                    "properties": {},
+                    "geometry": {
+                        "type": "LineString",
+                        "coordinates": coordinates
+                    }
+                }
+            },
+            "layout": {
+                "line-join": "round",
+                "line-cap": "round"
+            },
+            "paint": {
+                "line-color": "#888",
+                "line-width": 8
+            }
+        });
+
+        this.map.setCenter(coordinates[7]);
+
+    };
+
+    removeRoute = () => {
+        if (this.map && this.map.getLayer && this.map.getLayer('route')) {
+            this.map.removeLayer('route');
+            this.map.removeSource('route');
+        }
+    };
+
     render() {
+
+        const {coordinates} = this.props;
+
+        if (coordinates)
+            this.addRoute(coordinates);
+
+        if (!coordinates)
+            this.removeRoute();
+
         return <div>
             <div style={{width: '100%', height: '800px'}} ref={this.mapContainer}/>
             <MapsRoute/>
@@ -29,4 +77,4 @@ class Map extends Component {
     }
 }
 
-export default Map;
+export default connect(state => ({coordinates: getCoordinates(state)}))(Map);

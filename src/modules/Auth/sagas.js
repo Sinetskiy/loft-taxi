@@ -13,7 +13,7 @@ function* sagaAuthorize(action) {
             yield put(getLoginFailure(response.error));
         }
     } catch (error) {
-        yield put(getLoginFailure(error))
+        yield put(getLoginFailure(error.message))
     }
 }
 

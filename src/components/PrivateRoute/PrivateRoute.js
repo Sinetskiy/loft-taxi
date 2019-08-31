@@ -15,9 +15,5 @@ class PrivateRoute extends Component {
 }
 
 export default connect(
-    state => {
-        return {
-            isAuthorized: getIsAuthorized(state),
-        }
-    }
+    state => ({isAuthorized: getIsAuthorized(state)})
 )(PrivateRoute);

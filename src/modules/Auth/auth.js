@@ -4,17 +4,24 @@ import {getLoginRequest, getLoginSuccess, getLoginFailure, setLogout} from './ac
 
 const login = handleActions(
     {
-        [getLoginRequest]: (state, action) => action.payload,
         [getLoginSuccess]: () => true,
-        [getLoginFailure]: (state, action) => action.payload,
+        [getLoginFailure]: () => false,
         [setLogout]: () => false,
     },
     null,
 );
 
+const error = handleActions(
+    {
+        [getLoginFailure]: (state, action) => action.payload,
+    },
+    null,
+);
+
 export default combineReducers({
-    login
+    login,
+    error
 });
 
-export const getIsAuthorized = state => !!state.auth.login;
-export const getAuthorizeError = state => state.auth.login && state.auth.login.error;
+export const getIsAuthorized = state => state.auth.login;
+export const getAuthorizeError = state => state.auth.error;
