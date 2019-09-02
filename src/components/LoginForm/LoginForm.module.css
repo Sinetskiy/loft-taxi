@@ -1,0 +1,35 @@
+.jss872 {
+  flex-grow: 0;
+  max-width: 25%;
+  flex-basis: 25%;
+}
+
+.jss842 {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.jss858 {
+  justify-content: center;
+}
+
+.jss849 {
+  align-items: center;
+}
+
+.jss844 {
+  flex-direction: column;
+}
+
+.jss841 {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+
+.jss840 {
+  padding: 24px;
+  margin-top: 48px;
+  margin-bottom: 48px;
+}
