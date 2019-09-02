@@ -1,9 +1,10 @@
 import React, {PureComponent} from 'react';
-import './LoginForm.css';
-import Button from '../Button';
+import styles from './LoginForm.module.css';
+import classNames from 'classnames';
 import {connect} from "react-redux";
 import {getAuthorizeError, getIsAuthorized, getLoginRequest} from "../../modules/Auth";
 import {Redirect} from "react-router-dom";
+import {TextField, Typography, Button} from "@material-ui/core";
 
 const fields = [
     {
@@ -50,33 +51,33 @@ class LoginForm extends PureComponent {
             return <Redirect to='/map'/>;
 
         return (
-            <div className="login-form">
-                <h1 className="login-form-title">Авторизация</h1>
+            <div className={classNames(styles.jss841, styles.jss844, styles.jss849, styles.jss858)}>
+                <div className={classNames(styles.jss842, styles.jss872)}>
+                    <div className={classNames(styles.jss840)}>
+                        <Typography className="login-form-title" variant='h3'>Войти</Typography>
 
-                {fields.map(({id, label, type}) => (
-                    <p key={id} className="field">
-                        <label className="field__label" htmlFor={id}>
-                            <span className="field-label">{label}</span>
-                        </label>
-                        <input
-                            id={id}
-                            className={`field__input field-input t-input-${id}`}
-                            type={type}
-                            name={id}
-                            value={values[id]}
-                            onChange={this.handleChange}
-                        />
-                    </p>
-                ))}
+                        {fields.map(({id, label, type}) => (
+                            <div key={id}>
+                                <TextField
+                                    name={id}
+                                    type={type}
+                                    label={label}
+                                    value={values[id]}
+                                    onChange={this.handleChange}
+                                />
+                            </div>
+                        ))}
 
-                {authorizeError !== '' && (
-                    <p className="login-form-error t-login-error">{authorizeError}</p>
-                )}
+                        {authorizeError !== '' && (
+                            <p className="login-form-error">{authorizeError}</p>
+                        )}
 
-                <div className="login-form__buttons">
-                    <Button onClick={this.handleSubmit} className="t-login">
-                        Войти
-                    </Button>
+                        <div>
+                            <Button onClick={this.handleSubmit}>
+                                Войти
+                            </Button>
+                        </div>
+                    </div>
                 </div>
             </div>
         );

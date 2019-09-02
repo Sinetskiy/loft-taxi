@@ -11,6 +11,7 @@ import {
     getAddressList,
     getCoordinates
 } from "../../../modules/Routes";
+import {Link} from "react-router-dom";
 
 class MapsRoute extends React.Component {
     state = {
@@ -47,7 +48,7 @@ class MapsRoute extends React.Component {
 
     render() {
         const {selectedOption} = this.state;
-        const {addressList, coordinates} = this.props;
+        const {addressList, coordinates, profile} = this.props;
 
         if (!addressList)
             return null;
@@ -67,7 +68,7 @@ class MapsRoute extends React.Component {
                     </div>
                 </div>
             </div>
-            : <div className={classNames(styles.jss12, styles.jss16, styles.jss13, styles.jss670)}>
+            : profile ? <div className={classNames(styles.jss12, styles.jss16, styles.jss13, styles.jss670)}>
                 <div className={classNames(styles.jss267, styles.jss291)}>
                     <div className={classNames(styles.jss268, styles.jss307)}>
                         <h1 className={classNames(styles.jss43, styles.jss58, styles.jss65)}>Вызов такси</h1>
@@ -92,9 +93,25 @@ class MapsRoute extends React.Component {
                         </Button>
                     </div>
                 </div>
+            </div> : <div className={classNames(styles.jss12, styles.jss16, styles.jss13, styles.jss670)}>
+                <div className={classNames(styles.jss267, styles.jss291)}>
+                    <div className={classNames(styles.jss268, styles.jss307)}>
+                        <h1 className={classNames(styles.jss43, styles.jss58, styles.jss65)}>Заполните платежные данные</h1>
+                    </div>
+                    Укажите информацию о банковской карте, чтобы сделать заказ.
+                    <div className={classNames(styles.jss268, styles.jss307)}>
+                        <Button component={Link} to='/profile'>
+                            Перейти в профель
+                        </Button>
+                    </div>
+                </div>
             </div>;
     }
 }
 
-export default connect(state => ({addressList: getAddressList(state), coordinates: getCoordinates(state)}),
+export default connect(state => ({
+        addressList: getAddressList(state),
+        coordinates: getCoordinates(state),
+        profile: state.profile
+    }),
     {fetchAddressListRequest, fetchCoordinatesRequest, clearCoordinates})(MapsRoute);

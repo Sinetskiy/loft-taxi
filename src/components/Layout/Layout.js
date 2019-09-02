@@ -8,9 +8,7 @@ class Layout extends PureComponent {
         return (
             <React.Fragment>
                 {header ? React.createElement(header) : ''}
-                <main >
-                    {children}
-                </main>
+                {children}
             </React.Fragment>
         )
     }
